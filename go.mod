@@ -1,4 +1,4 @@
-module github.com/kraikub/account-manager-api
+module github.com/kraikub/account-management-api
 
 go 1.18
 

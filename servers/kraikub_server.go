@@ -11,13 +11,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kraikub/account-manager-api/internal/config"
+	"github.com/kraikub/account-management-api/config"
 )
 
 type kraikubServer struct {
 	router *gin.Engine
-	port int
-	name string
+	port   int
+	name   string
 }
 
 func NewKraikubServer(conf config.Config) kraikubServer {
@@ -25,8 +25,8 @@ func NewKraikubServer(conf config.Config) kraikubServer {
 	r := gin.Default()
 	return kraikubServer{
 		router: r,
-		port: conf.Server.Port,
-		name: conf.Server.Name,
+		port:   conf.Server.Port,
+		name:   conf.Server.Name,
 	}
 }
 

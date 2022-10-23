@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/kraikub/account-manager-api/internal/config"
-	"github.com/kraikub/account-manager-api/internal/controllers/handlers"
-	"github.com/kraikub/account-manager-api/internal/controllers/routers"
-	"github.com/kraikub/account-manager-api/internal/servers"
+	"github.com/kraikub/account-management-api/api/v1/controllers/handlers"
+	"github.com/kraikub/account-management-api/api/v1/controllers/routers"
+	"github.com/kraikub/account-management-api/config"
+	"github.com/kraikub/account-management-api/servers"
 )
 
 func main() {
