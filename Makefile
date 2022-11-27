@@ -2,7 +2,7 @@
 all: build
 
 run:
-	go run ./internal/cmd/main.go
+	go run ./api/v1/cmd/main.go
 
 image:
 	docker build -t kraikub/account-management-api -f ./build/docker/Dockerfile .

@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
+
+	"github.com/kraikub/account-management-api/api/v1/config"
 	"github.com/kraikub/account-management-api/api/v1/controllers/handlers"
 	"github.com/kraikub/account-management-api/api/v1/controllers/routers"
-	"github.com/kraikub/account-management-api/config"
 	"github.com/kraikub/account-management-api/servers"
 )
 
@@ -14,10 +16,12 @@ func main() {
 		panic(err)
 	}
 
-	kraikub := servers.NewKraikubServer(config)
+	kraikub := servers.NewKraikubServer(config.Server.Name, config.Server.Port)
 	accountHandler := handlers.NewAccountHandler()
-	routers.RegisterAccountRouter(kraikub.Router(), accountHandler)
+	routers.InitRouter(kraikub.Router(), accountHandler)
 
 	// No need any go routines
-	kraikub.Start()
+	kraikub.StartWithGraceFullShutdown(func() {
+		fmt.Println("stop!")
+	})
 }

@@ -1,3 +1,9 @@
 server:
   name: "name"
   port: 8080
+
+db:
+  mongo:
+
+services:
+  mail:

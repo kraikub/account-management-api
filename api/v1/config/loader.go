@@ -14,11 +14,9 @@ type server struct {
 }
 
 func GetRuntimeConfig() (Config, error) {
-
 	var conf Config
-
 	viper.SetConfigName("config")
-	viper.AddConfigPath("./internal/config")
+	viper.AddConfigPath("./api/v1/config")
 	viper.AutomaticEnv()
 	err := viper.ReadInConfig()
 	if err != nil {

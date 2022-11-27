@@ -1,0 +1,3 @@
+server:
+  name: "account-management-api"
+  port: 8080

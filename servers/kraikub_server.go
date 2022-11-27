@@ -11,8 +11,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kraikub/account-management-api/config"
 )
+
+type serverConfig struct {
+	Name string
+	Port int
+}
 
 type kraikubServer struct {
 	router *gin.Engine
@@ -20,13 +24,13 @@ type kraikubServer struct {
 	name   string
 }
 
-func NewKraikubServer(conf config.Config) kraikubServer {
+func NewKraikubServer(name string, port int) kraikubServer {
 
 	r := gin.Default()
 	return kraikubServer{
 		router: r,
-		port:   conf.Server.Port,
-		name:   conf.Server.Name,
+		port:   port,
+		name:   name,
 	}
 }
 
@@ -34,7 +38,7 @@ func (serv *kraikubServer) Router() *gin.Engine {
 	return serv.router
 }
 
-func (serv *kraikubServer) Start() {
+func (serv *kraikubServer) StartWithGraceFullShutdown(gc func()) {
 
 	srv := &http.Server{
 		Handler: serv.router,
@@ -53,11 +57,12 @@ func (serv *kraikubServer) Start() {
 	<-quit
 	log.Println("Shutdown Server ...")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown:", err)
 	}
+	gc()
 	// catching ctx.Done(). timeout of 5 seconds.
 	select {
 	case <-ctx.Done():

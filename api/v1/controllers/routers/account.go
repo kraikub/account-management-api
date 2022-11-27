@@ -8,6 +8,6 @@ type accountHandler interface {
 	Hello(c *gin.Context)
 }
 
-func RegisterAccountRouter(r *gin.Engine, handler accountHandler) {
+func InitRouter(r *gin.Engine, handler accountHandler) {
 	r.GET("/", handler.Hello)
 }
