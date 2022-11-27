@@ -1,1 +1,2 @@
-config/config.yaml
+# All configa.yaml files
+**/config.yaml

@@ -38,7 +38,7 @@ func (serv *kraikubServer) Router() *gin.Engine {
 	return serv.router
 }
 
-func (serv *kraikubServer) StartWithGraceFullShutdown(gc func()) {
+func (serv *kraikubServer) StartWithGraceFullShutdown(gc func(c context.CancelFunc)) {
 
 	srv := &http.Server{
 		Handler: serv.router,
@@ -62,7 +62,7 @@ func (serv *kraikubServer) StartWithGraceFullShutdown(gc func()) {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown:", err)
 	}
-	gc()
+	gc(cancel)
 	// catching ctx.Done(). timeout of 5 seconds.
 	select {
 	case <-ctx.Done():
