@@ -11,7 +11,7 @@ run-production:
 	make run
 
 run-production-ps:
-	sh ./run-production-ps.sh
+	. ./run-production.ps1
 
 image:
 	docker build -t kraikub/account-management-api -f ./build/docker/Dockerfile .
