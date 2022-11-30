@@ -9,11 +9,21 @@ import (
 
 type Config struct {
 	Server server
+	Db     db
+}
+
+type db struct {
+	Mongo mongo
 }
 
 type server struct {
 	Name string
 	Port int
+}
+
+type mongo struct {
+	Uri string
+	Name string
 }
 
 func getRuntimeConfigFromEnv() (Config, error) {

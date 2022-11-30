@@ -4,6 +4,9 @@ server:
 
 db:
   mongo:
+    url:
+  redis:
 
 services:
   mail:
+    host: "http://127.0.0.1:<PORT>"
